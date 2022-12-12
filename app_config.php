@@ -6,7 +6,7 @@
 		$apps[$x]['category'] = '';
 		$apps[$x]['subcategory'] = '';
 		$apps[$x]['version'] = '1.2';
-		$apps[$x]['license'] = 'BSD License';
+		$apps[$x]['license'] = 'BSD';
 		$apps[$x]['url'] = 'http://www.fusionpbx.com';
 		$apps[$x]['description']['en-us'] = '';
 
