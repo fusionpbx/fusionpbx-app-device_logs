@@ -5,7 +5,7 @@
 		$apps[$x]['uuid'] = '78b1e5c7-5028-43e7-a05b-a36b44f87087';
 		$apps[$x]['category'] = '';
 		$apps[$x]['subcategory'] = '';
-		$apps[$x]['version'] = '1.2';
+		$apps[$x]['version'] = '1.3';
 		$apps[$x]['license'] = 'BSD';
 		$apps[$x]['url'] = 'http://www.fusionpbx.com';
 		$apps[$x]['description']['en-us'] = '';
