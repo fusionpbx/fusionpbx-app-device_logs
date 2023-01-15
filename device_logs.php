@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright (c) 2019-2022 Mark J Crane <markjcrane@fusionpbx.com>
+	Copyright (c) 2019-2023 Mark J Crane <markjcrane@fusionpbx.com>
 	
 	Redistribution and use in source and binary forms, with or without
 	modification, are permitted provided that the following conditions
@@ -86,37 +86,43 @@
 	$order_by = $_GET["order_by"];
 	$order = $_GET["order"];
 
+//set the time zone
+	if (isset($_SESSION['domain']['time_zone']['name'])) {
+		$time_zone = $_SESSION['domain']['time_zone']['name'];
+	}
+	else {
+		$time_zone = date_default_timezone_get();
+	}
+
 //add the search string
-	if (isset($_GET["search"])) {
+	if (isset($_GET["search"]) && $_GET["search"] != '') {
 		$search =  strtolower($_GET["search"]);
-		$sql_search = " (";
-		$sql_search .= "	lower(device_mac_address) like :search ";
-		$sql_search .= "	or lower(request_scheme) like :search ";
-		$sql_search .= "	or lower(http_host) like :search ";
-		$sql_search .= "	or lower(server_port) like :search ";
-		$sql_search .= "	or lower(server_protocol) like :search ";
-		$sql_search .= "	or lower(query_string) like :search ";
-		$sql_search .= "	or lower(remote_address) like :search ";
-		$sql_search .= "	or lower(http_user_agent) like :search ";
-		$sql_search .= "	or lower(http_status) like :search ";
-		$sql_search .= "	or lower(http_status_code) like :search ";
-		$sql_search .= ") ";
-		$parameters['search'] = '%'.$search.'%';
 	}
 
 //get the count
-	$sql = "select count(device_log_uuid) from v_device_logs ";
+	$sql = "select count(device_log_uuid) \n";
+	$sql .= "from v_device_logs \n";
 	if ($_GET['show'] == "all" && permission_exists('device_log_all')) {
-		if (isset($sql_search)) {
-			$sql .= "where ".$sql_search;
-		}
+		$sql .= "where true \n";
 	}
 	else {
 		$sql .= "where (domain_uuid = :domain_uuid or domain_uuid is null) ";
-		if (isset($sql_search)) {
-			$sql .= "and ".$sql_search;
-		}
 		$parameters['domain_uuid'] = $domain_uuid;
+	}
+	if (isset($search)) {
+		$sql .= "and (";
+		$sql .= "	lower(device_mac_address) like :search ";
+		$sql .= "	or lower(request_scheme) like :search ";
+		$sql .= "	or lower(http_host) like :search ";
+		$sql .= "	or lower(server_port) like :search ";
+		$sql .= "	or lower(server_protocol) like :search ";
+		$sql .= "	or lower(query_string) like :search ";
+		$sql .= "	or lower(remote_address) like :search ";
+		$sql .= "	or lower(http_user_agent) like :search ";
+		$sql .= "	or lower(http_status) like :search ";
+		$sql .= "	or lower(http_status_code) like :search ";
+		$sql .= ") ";
+		$parameters['search'] = '%'.$search.'%';
 	}
 	$database = new database;
 	$num_rows = $database->select($sql, $parameters, 'column');
@@ -124,14 +130,57 @@
 //prepare to page the results
 	$rows_per_page = ($_SESSION['domain']['paging']['numeric'] != '') ? $_SESSION['domain']['paging']['numeric'] : 50;
 	$param = $search ? "&search=".$search : null;
-	$param = ($_GET['show'] == 'all' && permission_exists('device_log_all')) ? "&show=all" : null;
+	$param .= ($_GET['show'] == 'all' && permission_exists('device_log_all')) ? "&show=all" : null;
 	$page = is_numeric($_GET['page']) ? $_GET['page'] : 0;
 	list($paging_controls, $rows_per_page) = paging($num_rows, $param, $rows_per_page);
 	list($paging_controls_mini, $rows_per_page) = paging($num_rows, $param, $rows_per_page, true);
 	$offset = $rows_per_page * $page;
 
 //get the list
-	$sql = str_replace('count(device_log_uuid)', '*', $sql);
+	$sql = "select \n";
+	$sql .= "d.domain_uuid, \n";
+	$sql .= "device_log_uuid, \n";
+	$sql .= "device_uuid, \n";
+	$sql .= "d.domain_name, \n";
+	$sql .= "timestamp, \n";
+	$sql .= "to_char(timezone(:time_zone, timestamp), 'DD Mon YYYY') as date_formatted, \n";
+	$sql .= "to_char(timezone(:time_zone, timestamp), 'HH12:MI:SS am') as time_formatted, \n";
+	$sql .= "device_mac_address, \n";
+	$sql .= "request_scheme, \n";
+	$sql .= "http_host, \n";
+	$sql .= "server_port, \n";
+	$sql .= "server_protocol, \n";
+	$sql .= "query_string, \n";
+	$sql .= "remote_address, \n";
+	$sql .= "http_user_agent, \n";
+	$sql .= "http_status, \n";
+	$sql .= "http_status_code, \n";
+	$sql .= "http_content_body \n";
+	$sql .= "from v_device_logs as l, v_domains as d \n";
+	if ($_GET['show'] == "all" && permission_exists('device_log_all')) {
+		$sql .= "where true \n";
+	}
+	else {
+		$sql .= "where (l.domain_uuid = :domain_uuid or l.domain_uuid is null) \n";
+		$parameters['domain_uuid'] = $domain_uuid;
+	}
+	$sql .= "and l.domain_uuid = d.domain_uuid \n";
+	if (isset($search)) {
+		$sql .= "and ( \n";
+		$sql .= "	lower(device_mac_address) like :search \n";
+		$sql .= "	or lower(request_scheme) like :search \n";
+		$sql .= "	or lower(http_host) like :search \n";
+		$sql .= "	or lower(server_port) like :search \n";
+		$sql .= "	or lower(server_protocol) like :search \n";
+		$sql .= "	or lower(query_string) like :search \n";
+		$sql .= "	or lower(remote_address) like :search \n";
+		$sql .= "	or lower(http_user_agent) like :search \n";
+		$sql .= "	or lower(http_status) like :search \n";
+		$sql .= "	or lower(http_status_code) like :search \n";
+		$sql .= ") ";
+		$parameters['search'] = '%'.$search.'%';
+	}
+	$parameters['time_zone'] = $time_zone;
 	$sql .= order_by($order_by, $order, 'timestamp', 'desc');
 	$sql .= limit_offset($rows_per_page, $offset);
 	$database = new database;
@@ -209,17 +258,18 @@
 	if ($_GET['show'] == 'all' && permission_exists('device_log_all')) {
 		echo th_order_by('domain_name', $text['label-domain'], $order_by, $order);
 	}
-	echo th_order_by('timestamp', $text['label-timestamp'], $order_by, $order);
+	echo "<th class='left'>".$text['label-date']."</th>\n";
+	echo "<th class='left hide-md-dn'>".$text['label-time']."</th>\n";
 	echo th_order_by('device_mac_address', $text['label-device_mac_address'], $order_by, $order);
-	echo th_order_by('request_scheme', $text['label-request_scheme'], $order_by, $order);
-	echo th_order_by('http_host', $text['label-http_host'], $order_by, $order);
-	echo th_order_by('server_port', $text['label-server_port'], $order_by, $order);
-	echo th_order_by('server_protocol', $text['label-server_protocol'], $order_by, $order);
-	echo th_order_by('query_string', $text['label-query_string'], $order_by, $order);
+	echo "<th class='left hide-sm-dn'>".$text['label-request_scheme']."</th>\n";
+	echo "<th class='left hide-md-dn'>".$text['label-http_host']."</th>\n";
+	echo "<th class='left hide-md-dn'>".$text['label-server_port']."</th>\n";
+	echo "<th class='left hide-md-dn'>".$text['label-server_protocol']."</th>\n";
+	echo "<th class='left hide-md-dn'>".$text['label-query_string']."</th>\n";
 	echo th_order_by('remote_address', $text['label-remote_address'], $order_by, $order);
-	echo th_order_by('http_user_agent', $text['label-http_user_agent'], $order_by, $order);
-	echo th_order_by('http_status', $text['label-http_status'], $order_by, $order);
-	echo th_order_by('http_status_code', $text['label-http_status_code'], $order_by, $order);
+	echo "<th class='left hide-md-dn'>".$text['label-http_user_agent']."</th>\n";
+	echo "<th class='left hide-md-dn'>".$text['label-http_status']."</th>\n";
+	echo "<th class='left hide-md-dn'>".$text['label-http_status_code']."</th>\n";
 	if (permission_exists('device_log_edit') && $_SESSION['theme']['list_row_edit_button']['boolean'] == 'true') {
 		echo "	<td class='action-button'>&nbsp;</td>\n";
 	}
@@ -241,17 +291,18 @@
 			if ($_GET['show'] == 'all' && permission_exists('device_log_all')) {
 				echo "	<td>".escape($_SESSION['domains'][$row['domain_uuid']]['domain_name'])."</td>\n";
 			}
-			echo "	<td>".escape($row['timestamp'])."</td>\n";
+			echo "	<td>".escape($row['date_formatted'])."</td>\n";
+			echo "	<td class='left hide-md-dn'>".escape($row['time_formatted'])."</td>\n";
 			echo "	<td>".escape($row['device_mac_address'])."</td>\n";
-			echo "	<td>".escape($row['request_scheme'])."</td>\n";
-			echo "	<td>".escape($row['http_host'])."</td>\n";
-			echo "	<td>".escape($row['server_port'])."</td>\n";
-			echo "	<td>".escape($row['server_protocol'])."</td>\n";
-			echo "	<td>".escape($row['query_string'])."</td>\n";
+			echo "	<td class='left hide-sm-dn'>".escape($row['request_scheme'])."</td>\n";
+			echo "	<td class='left hide-md-dn'>".escape($row['http_host'])."</td>\n";
+			echo "	<td class='left hide-md-dn'>".escape($row['server_port'])."</td>\n";
+			echo "	<td class='left hide-md-dn'>".escape($row['server_protocol'])."</td>\n";
+			echo "	<td class='left hide-md-dn'>".escape($row['query_string'])."</td>\n";
 			echo "	<td>".escape($row['remote_address'])."</td>\n";
-			echo "	<td>".escape($row['http_user_agent'])."</td>\n";
-			echo "	<td>".escape($row['http_status'])."</td>\n";
-			echo "	<td>".escape($row['http_status_code'])."</td>\n";
+			echo "	<td class='left hide-md-dn'>".escape($row['http_user_agent'])."</td>\n";
+			echo "	<td class='left hide-md-dn'>".escape($row['http_status'])."</td>\n";
+			echo "	<td class='left hide-md-dn'>".escape($row['http_status_code'])."</td>\n";
 			if (permission_exists('device_log_edit') && $_SESSION['theme']['list_row_edit_button']['boolean'] == 'true') {
 				echo "	<td class='action-button'>\n";
 				echo button::create(['type'=>'button','title'=>$text['button-edit'],'icon'=>$_SESSION['theme']['button_icon_edit'],'link'=>$list_row_url]);
@@ -260,7 +311,6 @@
 			echo "</tr>\n";
 			$x++;
 		}
-		unset($device_logs);
 	}
 
 	echo "</table>\n";
