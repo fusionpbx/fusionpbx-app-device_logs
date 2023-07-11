@@ -44,7 +44,7 @@
 	$text = $language->get();
 
 //action add or update
-	if (is_uuid($_REQUEST["id"])) {
+	if (!empty($_REQUEST["id"]) && is_uuid($_REQUEST["id"])) {
 		$action = "update";
 		$device_log_uuid = $_REQUEST["id"];
 		$id = $_REQUEST["id"];
@@ -55,20 +55,20 @@
 
 //get http post variables and set them to php variables
 	if (is_array($_POST)) {
-		$device_log_uuid = $_POST["device_log_uuid"];
-		$device_uuid = $_POST["device_uuid"];
-		$timestamp = $_POST["timestamp"];
-		$device_mac_address = $_POST["device_mac_address"];
-		$request_scheme = $_POST["request_scheme"];
-		$http_host = $_POST["http_host"];
-		$server_port = $_POST["server_port"];
-		$server_protocol = $_POST["server_protocol"];
-		$query_string = $_POST["query_string"];
-		$remote_address = $_POST["remote_address"];
-		$http_user_agent = $_POST["http_user_agent"];
-		$http_status = $_POST["http_status"];
-		$http_status_code = $_POST["http_status_code"];
-		$http_content_body = $_POST["http_content_body"];
+		$device_log_uuid = $_POST["device_log_uuid"] ?? null;
+		$device_uuid = $_POST["device_uuid"] ?? null;
+		$timestamp = $_POST["timestamp"] ?? '';
+		$device_mac_address = $_POST["device_mac_address"] ?? '';
+		$request_scheme = $_POST["request_scheme"] ?? '';
+		$http_host = $_POST["http_host"] ?? '';
+		$server_port = $_POST["server_port"] ?? '';
+		$server_protocol = $_POST["server_protocol"] ?? '';
+		$query_string = $_POST["query_string"] ?? '';
+		$remote_address = $_POST["remote_address"] ?? '';
+		$http_user_agent = $_POST["http_user_agent"] ?? '';
+		$http_status = $_POST["http_status"] ?? '';
+		$http_status_code = $_POST["http_status_code"] ?? '';
+		$http_content_body = $_POST["http_content_body"] ?? '';
 	}
 
 //process the user data and save it to the database
@@ -174,8 +174,8 @@
 	}
 
 //pre-populate the form
-	if (is_array($_GET) && $_POST["persistformvar"] != "true") {
-		$device_log_uuid = $_GET["id"];
+	if (is_array($_GET) && empty($_POST["persistformvar"])) {
+		$device_log_uuid = $_GET["id"] ?? '';
 		$sql = "select * from v_device_logs ";
 		$sql .= "where device_log_uuid = :device_log_uuid ";
 		//$sql .= "and domain_uuid = :domain_uuid ";
