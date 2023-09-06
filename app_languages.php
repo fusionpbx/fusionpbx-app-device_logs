@@ -2,6 +2,7 @@
 
 	//Device Logs
 		$text['title-device_logs']['en-us'] = 'Device Logs';
+		$text['title-device_logs']['en-gb'] = 'Device Logs';
 		$text['title-device_logs']['ar-eg'] = 'سجلات الجهاز';
 		$text['title-device_logs']['de-at'] = 'Geräteprotokolle';
 		$text['title-device_logs']['de-ch'] = 'Geräteprotokolle';
@@ -20,8 +21,12 @@
 		$text['title-device_logs']['ru-ru'] = 'Журналы устройства';
 		$text['title-device_logs']['sv-se'] = 'Enhetsloggar';
 		$text['title-device_logs']['uk-ua'] = 'Журнали пристрою';
+		$text['title-device_logs']['zh-cn'] = '设备日志';
+		$text['title-device_logs']['ja-jp'] = 'デバイスログ';
+		$text['title-device_logs']['ko-kr'] = '장치 로그';
 
 		$text['title-device_log']['en-us'] = 'Device Log';
+		$text['title-device_log']['en-gb'] = 'Device Log';
 		$text['title-device_log']['ar-eg'] = 'سجل الجهاز';
 		$text['title-device_log']['de-at'] = 'Geräteprotokoll';
 		$text['title-device_log']['de-ch'] = 'Geräteprotokoll';
@@ -40,8 +45,12 @@
 		$text['title-device_log']['ru-ru'] = 'Журнал устройства';
 		$text['title-device_log']['sv-se'] = 'Enhetslogg';
 		$text['title-device_log']['uk-ua'] = 'Журнал пристрою';
+		$text['title-device_log']['zh-cn'] = '设备日志';
+		$text['title-device_log']['ja-jp'] = 'デバイスログ';
+		$text['title-device_log']['ko-kr'] = '장치 로그';
 
 		$text['description-device_logs']['en-us'] = 'Log of the device provisioning with details that help with security and troubleshooting.';
+		$text['description-device_logs']['en-gb'] = 'Log of the device provisioning with details that help with security and troubleshooting.';
 		$text['description-device_logs']['ar-eg'] = 'سجل توفير الجهاز مع التفاصيل التي تساعد في الأمان واستكشاف الأخطاء وإصلاحها.';
 		$text['description-device_logs']['de-at'] = 'Protokoll der Gerätebereitstellung mit Details, die bei der Sicherheit und Fehlerbehebung helfen.';
 		$text['description-device_logs']['de-ch'] = 'Protokoll der Gerätebereitstellung mit Details, die bei der Sicherheit und Fehlerbehebung helfen.';
@@ -60,8 +69,12 @@
 		$text['description-device_logs']['ru-ru'] = 'Журнал устройства, обеспечивающего детали, которые помогают с безопасностью и устранением неполадок.';
 		$text['description-device_logs']['sv-se'] = 'Logga över enhetens tillhandahållande med detaljer som hjälper till med säkerhet och felsökning.';
 		$text['description-device_logs']['uk-ua'] = 'Журнал надання пристрою з деталями, які допомагають у безпеці та усуненні несправностей.';
+		$text['description-device_logs']['zh-cn'] = '设备配置日志，其中包含有助于安全和故障排除的详细信息。';
+		$text['description-device_logs']['ja-jp'] = 'セキュリティとトラブルシューティングに役立つ詳細を含むデバイス プロビジョニングのログ。';
+		$text['description-device_logs']['ko-kr'] = '보안 및 문제 해결에 도움이 되는 세부정보가 포함된 장치 프로비저닝 로그입니다.';
 
 		$text['label-device_uuid']['en-us'] = 'Device UUID';
+		$text['label-device_uuid']['en-gb'] = 'Device UUID';
 		$text['label-device_uuid']['ar-eg'] = 'جهاز UUID';
 		$text['label-device_uuid']['de-at'] = 'Gerät UUID';
 		$text['label-device_uuid']['de-ch'] = 'Gerät UUID';
@@ -80,8 +93,12 @@
 		$text['label-device_uuid']['ru-ru'] = 'Устройство UUID';
 		$text['label-device_uuid']['sv-se'] = 'Enhet UUID';
 		$text['label-device_uuid']['uk-ua'] = 'Пристрій uuid';
+		$text['title-device_uuid']['zh-cn'] = '设备UUID';
+		$text['title-device_uuid']['ja-jp'] = 'デバイスのUUID';
+		$text['title-device_uuid']['ko-kr'] = '장치 UUID';
 
 		$text['description-device_uuid']['en-us'] = 'Enter the device uuid.';
+		$text['description-device_uuid']['en-gb'] = 'Enter the device uuid.';
 		$text['description-device_uuid']['ar-eg'] = 'أدخل الجهاز UUID.';
 		$text['description-device_uuid']['de-at'] = 'Geben Sie das Gerät UUID ein.';
 		$text['description-device_uuid']['de-ch'] = 'Geben Sie das Gerät UUID ein.';
@@ -100,8 +117,12 @@
 		$text['description-device_uuid']['ru-ru'] = 'Введите устройство UUID.';
 		$text['description-device_uuid']['sv-se'] = 'Ange enheten UUID.';
 		$text['description-device_uuid']['uk-ua'] = 'Введіть пристрій UUID.';
+		$text['description-device_uuid']['zh-cn'] = '输入设备 uuid。';
+		$text['description-device_uuid']['ja-jp'] = 'デバイスの UUID を入力します。';
+		$text['description-device_uuid']['ko-kr'] = '장치 uuid를 입력하세요.';
 
 		$text['label-timestamp']['en-us'] = 'Timestamp';
+		$text['label-timestamp']['en-gb'] = 'Timestamp';
 		$text['label-timestamp']['ar-eg'] = 'الطابع الزمني';
 		$text['label-timestamp']['de-at'] = 'Zeitstempel';
 		$text['label-timestamp']['de-ch'] = 'Zeitstempel';
@@ -120,8 +141,12 @@
 		$text['label-timestamp']['ru-ru'] = 'Временная метка';
 		$text['label-timestamp']['sv-se'] = 'Tidsstämpel';
 		$text['label-timestamp']['uk-ua'] = 'Часова позначка';
+		$text['label-timestamp']['zh-cn'] = '时间戳';
+		$text['label-timestamp']['ja-jp'] = 'タイムスタンプ';
+		$text['label-timestamp']['ko-kr'] = '타임스탬프';
 
 		$text['description-timestamp']['en-us'] = 'Enter the http content body.';
+		$text['description-timestamp']['en-gb'] = 'Enter the http content body.';
 		$text['description-timestamp']['ar-eg'] = 'أدخل هيئة محتوى HTTP.';
 		$text['description-timestamp']['de-at'] = 'Geben Sie den HTTP -Inhaltskörper ein.';
 		$text['description-timestamp']['de-ch'] = 'Geben Sie den HTTP -Inhaltskörper ein.';
@@ -140,8 +165,12 @@
 		$text['description-timestamp']['ru-ru'] = 'Введите тело контента HTTP.';
 		$text['description-timestamp']['sv-se'] = 'Ange HTTP -innehållskroppen.';
 		$text['description-timestamp']['uk-ua'] = 'Введіть корпус вмісту HTTP.';
+		$text['description-timestamp']['zh-cn'] = '输入http内容正文。';
+		$text['description-timestamp']['ja-jp'] = 'http コンテンツの本文を入力します。';
+		$text['description-timestamp']['ko-kr'] = 'http 콘텐츠 본문을 입력하세요.';
 
 		$text['label-device_mac_address']['en-us'] = 'Device Address';
+		$text['label-device_mac_address']['en-gb'] = 'Device Address';
 		$text['label-device_mac_address']['ar-eg'] = 'عنوان الجهاز';
 		$text['label-device_mac_address']['de-at'] = 'Geräteadresse';
 		$text['label-device_mac_address']['de-ch'] = 'Geräteadresse';
@@ -160,8 +189,12 @@
 		$text['label-device_mac_address']['ru-ru'] = 'Адрес устройства';
 		$text['label-device_mac_address']['sv-se'] = 'Enhetsadress';
 		$text['label-device_mac_address']['uk-ua'] = 'Адреса пристрою';
+		$text['label-device_mac_address']['zh-cn'] = '设备地址';
+		$text['label-device_mac_address']['ja-jp'] = 'デバイスアドレス';
+		$text['label-device_mac_address']['ko-kr'] = '장치 주소';
 
 		$text['description-device_mac_address']['en-us'] = 'Enter the device mac address.';
+		$text['description-device_mac_address']['en-gb'] = 'Enter the device mac address.';
 		$text['description-device_mac_address']['ar-eg'] = 'أدخل عنوان MAC MAC.';
 		$text['description-device_mac_address']['de-at'] = 'Geben Sie die Geräte -MAC -Adresse ein.';
 		$text['description-device_mac_address']['de-ch'] = 'Geben Sie die Geräte -MAC -Adresse ein.';
@@ -180,8 +213,12 @@
 		$text['description-device_mac_address']['ru-ru'] = 'Введите MAC -адрес устройства.';
 		$text['description-device_mac_address']['sv-se'] = 'Ange enhetens MAC -adress.';
 		$text['description-device_mac_address']['uk-ua'] = 'Введіть MAC -адресу пристрою.';
+		$text['description-device_mac_address']['zh-cn'] = '输入设备 MAC 地址。';
+		$text['description-device_mac_address']['ja-jp'] = 'デバイスの MAC アドレスを入力します。';
+		$text['description-device_mac_address']['ko-kr'] = '장치의 MAC 주소를 입력하세요.';
 
 		$text['label-request_scheme']['en-us'] = 'Request Scheme';
+		$text['label-request_scheme']['en-gb'] = 'Request Scheme';
 		$text['label-request_scheme']['ar-eg'] = 'طلب مخطط';
 		$text['label-request_scheme']['de-at'] = 'Anfrageschema';
 		$text['label-request_scheme']['de-ch'] = 'Anfrageschema';
@@ -200,8 +237,12 @@
 		$text['label-request_scheme']['ru-ru'] = 'Схема запроса';
 		$text['label-request_scheme']['sv-se'] = 'Begäran';
 		$text['label-request_scheme']['uk-ua'] = 'Схема запиту';
+		$text['label-request_scheme']['zh-cn'] = '请求方案';
+		$text['label-request_scheme']['ja-jp'] = 'リクエストスキーム';
+		$text['label-request_scheme']['ko-kr'] = '요청 방식';
 
 		$text['description-request_scheme']['en-us'] = 'Enter the request scheme.';
+		$text['description-request_scheme']['en-gb'] = 'Enter the request scheme.';
 		$text['description-request_scheme']['ar-eg'] = 'أدخل مخطط الطلب.';
 		$text['description-request_scheme']['de-at'] = 'Geben Sie das Anforderungsschema ein.';
 		$text['description-request_scheme']['de-ch'] = 'Geben Sie das Anforderungsschema ein.';
@@ -220,8 +261,12 @@
 		$text['description-request_scheme']['ru-ru'] = 'Введите схему запроса.';
 		$text['description-request_scheme']['sv-se'] = 'Ange förfrågningssystemet.';
 		$text['description-request_scheme']['uk-ua'] = 'Введіть схему запиту.';
+		$text['description-request_scheme']['zh-cn'] = '输入请求方案。';
+		$text['description-request_scheme']['ja-jp'] = 'リクエストスキームを入力します。';
+		$text['description-request_scheme']['ko-kr'] = '요청 구성표를 입력합니다.';
 
 		$text['label-http_host']['en-us'] = 'HTTP Host';
+		$text['label-http_host']['en-gb'] = 'HTTP Host';
 		$text['label-http_host']['ar-eg'] = 'HTTP مضيف';
 		$text['label-http_host']['de-at'] = 'HTTP -Host';
 		$text['label-http_host']['de-ch'] = 'HTTP -Host';
@@ -240,8 +285,12 @@
 		$text['label-http_host']['ru-ru'] = 'HTTP -хост';
 		$text['label-http_host']['sv-se'] = 'Http -värd';
 		$text['label-http_host']['uk-ua'] = 'HTTP -хост';
+		$text['label-http_host']['zh-cn'] = 'HTTP 主机';
+		$text['label-http_host']['ja-jp'] = 'HTTPホスト';
+		$text['label-http_host']['ko-kr'] = 'HTTP 호스트';
 
 		$text['description-http_host']['en-us'] = 'Enter the http host.';
+		$text['description-http_host']['en-gb'] = 'Enter the http host.';
 		$text['description-http_host']['ar-eg'] = 'أدخل مضيف HTTP.';
 		$text['description-http_host']['de-at'] = 'Geben Sie den HTTP -Host ein.';
 		$text['description-http_host']['de-ch'] = 'Geben Sie den HTTP -Host ein.';
@@ -260,8 +309,12 @@
 		$text['description-http_host']['ru-ru'] = 'Введите HTTP -хост.';
 		$text['description-http_host']['sv-se'] = 'Ange HTTP -värden.';
 		$text['description-http_host']['uk-ua'] = 'Введіть хост HTTP.';
+		$text['description-http_host']['zh-cn'] = '输入 http 主机。';
+		$text['description-http_host']['ja-jp'] = 'http ホストを入力します。';
+		$text['description-http_host']['ko-kr'] = 'http 호스트를 입력하세요.';
 
 		$text['label-server_port']['en-us'] = 'Server Port';
+		$text['label-server_port']['en-gb'] = 'Server Port';
 		$text['label-server_port']['ar-eg'] = 'منفذ الخادم';
 		$text['label-server_port']['de-at'] = 'Server Port';
 		$text['label-server_port']['de-ch'] = 'Server Port';
@@ -280,8 +333,12 @@
 		$text['label-server_port']['ru-ru'] = 'Порт сервера';
 		$text['label-server_port']['sv-se'] = 'Server Port';
 		$text['label-server_port']['uk-ua'] = 'Серверний порт';
+		$text['label-server_port']['zh-cn'] = '服务器端口';
+		$text['label-server_port']['ja-jp'] = 'サーバポート';
+		$text['label-server_port']['ko-kr'] = '서버 포트';
 
 		$text['description-server_port']['en-us'] = 'Enter the server port.';
+		$text['description-server_port']['en-gb'] = 'Enter the server port.';
 		$text['description-server_port']['ar-eg'] = 'أدخل منفذ الخادم.';
 		$text['description-server_port']['de-at'] = 'Geben Sie den Serverport ein.';
 		$text['description-server_port']['de-ch'] = 'Geben Sie den Serverport ein.';
@@ -300,8 +357,12 @@
 		$text['description-server_port']['ru-ru'] = 'Введите порт сервера.';
 		$text['description-server_port']['sv-se'] = 'Ange serverporten.';
 		$text['description-server_port']['uk-ua'] = 'Введіть порт сервера.';
+		$text['description-server_port']['zh-cn'] = '输入服务器端口。';
+		$text['description-server_port']['ja-jp'] = 'サーバーポートを入力します。';
+		$text['description-server_port']['ko-kr'] = '서버 포트를 입력하세요.';
 
 		$text['label-server_protocol']['en-us'] = 'Server Protocol';
+		$text['label-server_protocol']['en-gb'] = 'Server Protocol';
 		$text['label-server_protocol']['ar-eg'] = 'بروتوكول الخادم';
 		$text['label-server_protocol']['de-at'] = 'Serverprotokoll';
 		$text['label-server_protocol']['de-ch'] = 'Serverprotokoll';
@@ -320,8 +381,12 @@
 		$text['label-server_protocol']['ru-ru'] = 'Протокол сервера';
 		$text['label-server_protocol']['sv-se'] = 'Serverprotokoll';
 		$text['label-server_protocol']['uk-ua'] = 'Протокол сервера';
+		$text['label-server_protocol']['zh-cn'] = '服务器协议';
+		$text['label-server_protocol']['ja-jp'] = 'サーバープロトコル';
+		$text['label-server_protocol']['ko-kr'] = '서버 프로토콜';
 
 		$text['description-server_protocol']['en-us'] = 'Enter the http protocol.';
+		$text['description-server_protocol']['en-gb'] = 'Enter the http protocol.';
 		$text['description-server_protocol']['ar-eg'] = 'أدخل بروتوكول HTTP.';
 		$text['description-server_protocol']['de-at'] = 'Geben Sie das HTTP -Protokoll ein.';
 		$text['description-server_protocol']['de-ch'] = 'Geben Sie das HTTP -Protokoll ein.';
@@ -340,8 +405,12 @@
 		$text['description-server_protocol']['ru-ru'] = 'Введите протокол HTTP.';
 		$text['description-server_protocol']['sv-se'] = 'Ange HTTP -protokollet.';
 		$text['description-server_protocol']['uk-ua'] = 'Введіть протокол HTTP.';
+		$text['description-server_protocol']['zh-cn'] = '输入http协议。';
+		$text['description-server_protocol']['ja-jp'] = 'http プロトコルを入力します。';
+		$text['description-server_protocol']['ko-kr'] = 'http 프로토콜을 입력하세요.';
 
 		$text['label-query_string']['en-us'] = 'Query String';
+		$text['label-query_string']['en-gb'] = 'Query String';
 		$text['label-query_string']['ar-eg'] = 'سلسلة الاستعلام';
 		$text['label-query_string']['de-at'] = 'Abfragezeichenfolge';
 		$text['label-query_string']['de-ch'] = 'Abfragezeichenfolge';
@@ -360,8 +429,12 @@
 		$text['label-query_string']['ru-ru'] = 'Строка запроса';
 		$text['label-query_string']['sv-se'] = 'Frågesträng';
 		$text['label-query_string']['uk-ua'] = 'Рядок запиту';
+		$text['label-query_string']['zh-cn'] = '请求参数';
+		$text['label-query_string']['ja-jp'] = 'クエリ文字列';
+		$text['label-query_string']['ko-kr'] = '쿼리 문자열';
 
 		$text['description-query_string']['en-us'] = 'Enter the query string.';
+		$text['description-query_string']['en-gb'] = 'Enter the query string.';
 		$text['description-query_string']['ar-eg'] = 'أدخل سلسلة الاستعلام.';
 		$text['description-query_string']['de-at'] = 'Geben Sie die Abfragezeichenfolge ein.';
 		$text['description-query_string']['de-ch'] = 'Geben Sie die Abfragezeichenfolge ein.';
@@ -380,8 +453,12 @@
 		$text['description-query_string']['ru-ru'] = 'Введите строку запроса.';
 		$text['description-query_string']['sv-se'] = 'Ange frågesträngen.';
 		$text['description-query_string']['uk-ua'] = 'Введіть рядок запиту.';
+		$text['description-query_string']['zh-cn'] = '输入查询字符串。';
+		$text['description-query_string']['ja-jp'] = 'クエリ文字列を入力します。';
+		$text['description-query_string']['ko-kr'] = '쿼리 문자열을 입력하세요.';
 
 		$text['label-remote_address']['en-us'] = 'Remote Address';
+		$text['label-remote_address']['en-gb'] = 'Remote Address';
 		$text['label-remote_address']['ar-eg'] = 'عنوان بعيد';
 		$text['label-remote_address']['de-at'] = 'Remoteadresse';
 		$text['label-remote_address']['de-ch'] = 'Remoteadresse';
@@ -400,8 +477,12 @@
 		$text['label-remote_address']['ru-ru'] = 'Удаленный адрес';
 		$text['label-remote_address']['sv-se'] = 'Fjärradress';
 		$text['label-remote_address']['uk-ua'] = 'Віддалена адреса';
+		$text['label-remote_address']['zh-cn'] = '远程地址';
+		$text['label-remote_address']['ja-jp'] = 'リモートアドレス';
+		$text['label-remote_address']['ko-kr'] = '원격 주소';
 
 		$text['description-remote_address']['en-us'] = 'Enter the remote address.';
+		$text['description-remote_address']['en-gb'] = 'Enter the remote address.';
 		$text['description-remote_address']['ar-eg'] = 'أدخل العنوان البعيد.';
 		$text['description-remote_address']['de-at'] = 'Geben Sie die Remote -Adresse ein.';
 		$text['description-remote_address']['de-ch'] = 'Geben Sie die Remote -Adresse ein.';
@@ -420,8 +501,12 @@
 		$text['description-remote_address']['ru-ru'] = 'Введите удаленный адрес.';
 		$text['description-remote_address']['sv-se'] = 'Ange fjärradressen.';
 		$text['description-remote_address']['uk-ua'] = 'Введіть віддалену адресу.';
+		$text['description-remote_address']['zh-cn'] = '输入远程地址。';
+		$text['description-remote_address']['ja-jp'] = 'リモートアドレスを入力します。';
+		$text['description-remote_address']['ko-kr'] = '원격 주소를 입력하세요.';
 
 		$text['label-http_user_agent']['en-us'] = 'User Agent';
+		$text['label-http_user_agent']['en-gb'] = 'User Agent';
 		$text['label-http_user_agent']['ar-eg'] = 'وكيل المستخدم';
 		$text['label-http_user_agent']['de-at'] = 'User-Agent';
 		$text['label-http_user_agent']['de-ch'] = 'User-Agent';
@@ -440,8 +525,12 @@
 		$text['label-http_user_agent']['ru-ru'] = 'Пользовательский агент';
 		$text['label-http_user_agent']['sv-se'] = 'Användaragent';
 		$text['label-http_user_agent']['uk-ua'] = 'Агент користувача';
+		$text['label-http_user_agent']['zh-cn'] = '用户代理';
+		$text['label-http_user_agent']['ja-jp'] = 'ユーザーエージェント';
+		$text['label-http_user_agent']['ko-kr'] = '사용자 에이전트';
 
 		$text['description-http_user_agent']['en-us'] = 'Enter the user agent.';
+		$text['description-http_user_agent']['en-gb'] = 'Enter the user agent.';
 		$text['description-http_user_agent']['ar-eg'] = 'أدخل وكيل المستخدم.';
 		$text['description-http_user_agent']['de-at'] = 'Geben Sie den Benutzeragenten ein.';
 		$text['description-http_user_agent']['de-ch'] = 'Geben Sie den Benutzeragenten ein.';
@@ -460,8 +549,12 @@
 		$text['description-http_user_agent']['ru-ru'] = 'Введите пользовательский агент.';
 		$text['description-http_user_agent']['sv-se'] = 'Ange användaragenten.';
 		$text['description-http_user_agent']['uk-ua'] = 'Введіть агент користувача.';
+		$text['description-http_user_agent']['zh-cn'] = '输入用户代理。';
+		$text['description-http_user_agent']['ja-jp'] = 'ユーザーエージェントを入力します。';
+		$text['description-http_user_agent']['ko-kr'] = '사용자 에이전트를 입력하세요.';
 
 		$text['label-http_status']['en-us'] = 'HTTP Status';
+		$text['label-http_status']['en-gb'] = 'HTTP Status';
 		$text['label-http_status']['ar-eg'] = 'حالة HTTP';
 		$text['label-http_status']['de-at'] = 'HTTP -Status';
 		$text['label-http_status']['de-ch'] = 'HTTP -Status';
@@ -480,8 +573,12 @@
 		$text['label-http_status']['ru-ru'] = 'Статус HTTP';
 		$text['label-http_status']['sv-se'] = 'Http -status';
 		$text['label-http_status']['uk-ua'] = 'Статус HTTP';
+		$text['label-http_status']['zh-cn'] = 'HTTP 状态';
+		$text['label-http_status']['ja-jp'] = 'HTTPステータス';
+		$text['label-http_status']['ko-kr'] = 'HTTP 상태';
 
 		$text['description-http_status']['en-us'] = 'Enter the http status.';
+		$text['description-http_status']['en-gb'] = 'Enter the http status.';
 		$text['description-http_status']['ar-eg'] = 'أدخل حالة HTTP.';
 		$text['description-http_status']['de-at'] = 'Geben Sie den HTTP -Status ein.';
 		$text['description-http_status']['de-ch'] = 'Geben Sie den HTTP -Status ein.';
@@ -500,8 +597,12 @@
 		$text['description-http_status']['ru-ru'] = 'Введите статус HTTP.';
 		$text['description-http_status']['sv-se'] = 'Ange HTTP -status.';
 		$text['description-http_status']['uk-ua'] = 'Введіть статус HTTP.';
+		$text['description-http_status']['zh-cn'] = '输入 http 状态。';
+		$text['description-http_status']['ja-jp'] = 'http ステータスを入力します。';
+		$text['description-http_status']['ko-kr'] = 'http 상태를 입력하세요.';
 
 		$text['label-http_status_code']['en-us'] = 'HTTP Status Code';
+		$text['label-http_status_code']['en-gb'] = 'HTTP Status Code';
 		$text['label-http_status_code']['ar-eg'] = 'رمز حالة HTTP';
 		$text['label-http_status_code']['de-at'] = 'HTTP -Statuscode';
 		$text['label-http_status_code']['de-ch'] = 'HTTP -Statuscode';
@@ -520,8 +621,12 @@
 		$text['label-http_status_code']['ru-ru'] = 'Http code';
 		$text['label-http_status_code']['sv-se'] = 'Http statuskod';
 		$text['label-http_status_code']['uk-ua'] = 'Код статусу HTTP';
+		$text['label-http_status_code']['zh-cn'] = 'HTTP 状态代码';
+		$text['label-http_status_code']['ja-jp'] = 'HTTPステータスコード';
+		$text['label-http_status_code']['ko-kr'] = 'HTTP 상태 코드';
 
 		$text['description-http_status_code']['en-us'] = 'Enter the http status code.';
+		$text['description-http_status_code']['en-gb'] = 'Enter the http status code.';
 		$text['description-http_status_code']['ar-eg'] = 'أدخل رمز حالة HTTP.';
 		$text['description-http_status_code']['de-at'] = 'Geben Sie den HTTP -Statuscode ein.';
 		$text['description-http_status_code']['de-ch'] = 'Geben Sie den HTTP -Statuscode ein.';
@@ -540,8 +645,12 @@
 		$text['description-http_status_code']['ru-ru'] = 'Введите код состояния HTTP.';
 		$text['description-http_status_code']['sv-se'] = 'Ange HTTP -statuskoden.';
 		$text['description-http_status_code']['uk-ua'] = 'Введіть код статусу HTTP.';
+		$text['description-http_status_code']['zh-cn'] = '输入 http 状态代码。';
+		$text['description-http_status_code']['ja-jp'] = 'httpステータスコードを入力します。';
+		$text['description-http_status_code']['ko-kr'] = 'http 상태 코드를 입력하세요.';
 
 		$text['label-http_content_type']['en-us'] = 'HTTP Content Type';
+		$text['label-http_content_type']['en-gb'] = 'HTTP Content Type';
 		$text['label-http_content_type']['ar-eg'] = 'نوع محتوى HTTP';
 		$text['label-http_content_type']['de-at'] = 'HTTP -Inhaltstyp';
 		$text['label-http_content_type']['de-ch'] = 'HTTP -Inhaltstyp';
@@ -560,8 +669,12 @@
 		$text['label-http_content_type']['ru-ru'] = 'HTTP -тип контента';
 		$text['label-http_content_type']['sv-se'] = 'Http innehållstyp';
 		$text['label-http_content_type']['uk-ua'] = 'Тип вмісту HTTP';
+		$text['label-http_content_type']['zh-cn'] = 'HTTP 内容类型';
+		$text['label-http_content_type']['ja-jp'] = 'HTTP コンテンツ タイプ';
+		$text['label-http_content_type']['ko-kr'] = 'HTTP 콘텐츠 유형';
 
 		$text['description-http_content_type']['en-us'] = 'Enter the http content type.';
+		$text['description-http_content_type']['en-gb'] = 'Enter the http content type.';
 		$text['description-http_content_type']['ar-eg'] = 'أدخل نوع محتوى HTTP.';
 		$text['description-http_content_type']['de-at'] = 'Geben Sie den HTTP -Inhaltstyp ein.';
 		$text['description-http_content_type']['de-ch'] = 'Geben Sie den HTTP -Inhaltstyp ein.';
@@ -580,8 +693,12 @@
 		$text['description-http_content_type']['ru-ru'] = 'Введите тип контента HTTP.';
 		$text['description-http_content_type']['sv-se'] = 'Ange HTTP -innehållstyp.';
 		$text['description-http_content_type']['uk-ua'] = 'Введіть тип вмісту HTTP.';
+		$text['description-http_content_type']['zh-cn'] = '输入 http 内容类型。';
+		$text['description-http_content_type']['ja-jp'] = 'http コンテンツ タイプを入力します。';
+		$text['description-http_content_type']['ko-kr'] = 'http 콘텐츠 유형을 입력합니다.';
 
 		$text['label-http_content_body']['en-us'] = 'HTTP Content Body';
+		$text['label-http_content_body']['en-gb'] = 'HTTP Content Body';
 		$text['label-http_content_body']['ar-eg'] = 'HTTP محتوى الجسم';
 		$text['label-http_content_body']['de-at'] = 'HTTP -Inhaltskörper';
 		$text['label-http_content_body']['de-ch'] = 'HTTP -Inhaltskörper';
@@ -600,8 +717,12 @@
 		$text['label-http_content_body']['ru-ru'] = 'HTTP Content Body';
 		$text['label-http_content_body']['sv-se'] = 'Http innehållskropp';
 		$text['label-http_content_body']['uk-ua'] = 'HTTP Вміст';
+		$text['label-http_content_body']['zh-cn'] = 'HTTP 内容正文';
+		$text['label-http_content_body']['ja-jp'] = 'HTTPコンテンツ本体';
+		$text['label-http_content_body']['ko-kr'] = 'HTTP 콘텐츠 본문';
 
 		$text['description-http_content_body']['en-us'] = 'Enter the http content body.';
+		$text['description-http_content_body']['en-gb'] = 'Enter the http content body.';
 		$text['description-http_content_body']['ar-eg'] = 'أدخل هيئة محتوى HTTP.';
 		$text['description-http_content_body']['de-at'] = 'Geben Sie den HTTP -Inhaltskörper ein.';
 		$text['description-http_content_body']['de-ch'] = 'Geben Sie den HTTP -Inhaltskörper ein.';
@@ -620,5 +741,8 @@
 		$text['description-http_content_body']['ru-ru'] = 'Введите тело контента HTTP.';
 		$text['description-http_content_body']['sv-se'] = 'Ange HTTP -innehållskroppen.';
 		$text['description-http_content_body']['uk-ua'] = 'Введіть корпус вмісту HTTP.';
+		$text['description-http_content_body']['zh-cn'] = '输入http内容正文。';
+		$text['description-http_content_body']['ja-jp'] = 'http コンテンツの本文を入力します。;
+		$text['description-http_content_body']['ko-kr'] = 'http 콘텐츠 본문을 입력하세요.';
 
 ?>
