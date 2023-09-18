@@ -742,7 +742,7 @@
 		$text['description-http_content_body']['sv-se'] = 'Ange HTTP -innehållskroppen.';
 		$text['description-http_content_body']['uk-ua'] = 'Введіть корпус вмісту HTTP.';
 		$text['description-http_content_body']['zh-cn'] = '输入http内容正文。';
-		$text['description-http_content_body']['ja-jp'] = 'http コンテンツの本文を入力します。;
+		$text['description-http_content_body']['ja-jp'] = 'http コンテンツの本文を入力します。';
 		$text['description-http_content_body']['ko-kr'] = 'http 콘텐츠 본문을 입력하세요.';
 
 ?>
