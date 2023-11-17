@@ -65,7 +65,8 @@
 		$apps[$x]['db'][$y]['fields'][$z]['search_by'] = 'false';
 		$apps[$x]['db'][$y]['fields'][$z]['description']['en-us'] = 'Enter the http content body.';
 		$z++;
-		$apps[$x]['db'][$y]['fields'][$z]['name'] = 'device_mac_address';
+		$apps[$x]['db'][$y]['fields'][$z]['name']['text'] = "device_address";
+		$apps[$x]['db'][$y]['fields'][$z]['name']['deprecated'] = "device_mac_address";
 		$apps[$x]['db'][$y]['fields'][$z]['type'] = 'text';
 		$apps[$x]['db'][$y]['fields'][$z]['search_by'] = 'true';
 		$apps[$x]['db'][$y]['fields'][$z]['description']['en-us'] = 'Enter the device mac address.';
