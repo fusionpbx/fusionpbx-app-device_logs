@@ -39,7 +39,7 @@
 			$array['device_logs'][0]['domain_uuid'] = $_SESSION['domain_uuid'];
 			$array['device_logs'][0]['device_uuid'] = $device_uuid;
 			$array['device_logs'][0]['timestamp'] = 'now';
-			$array['device_logs'][0]['device_mac_address'] = $mac;
+			$array['device_logs'][0]['device_address'] = $mac;
 			$array['device_logs'][0]['request_scheme'] = $_SERVER['REQUEST_SCHEME'];
 			$array['device_logs'][0]['http_host'] = $_SERVER['HTTP_HOST'];
 			$array['device_logs'][0]['server_port'] = $_SERVER['SERVER_PORT'];
