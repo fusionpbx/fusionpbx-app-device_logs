@@ -58,7 +58,7 @@
 		$device_log_uuid = $_POST["device_log_uuid"] ?? null;
 		$device_uuid = $_POST["device_uuid"] ?? null;
 		$timestamp = $_POST["timestamp"] ?? '';
-		$device_mac_address = $_POST["device_mac_address"] ?? '';
+		$device_address = $_POST["device_address"] ?? '';
 		$request_scheme = $_POST["request_scheme"] ?? '';
 		$http_host = $_POST["http_host"] ?? '';
 		$server_port = $_POST["server_port"] ?? '';
@@ -106,7 +106,7 @@
 			$msg = '';
 			//if (strlen($device_uuid) == 0) { $msg .= $text['message-required']." ".$text['label-device_uuid']."<br>\n"; }
 			if (strlen($timestamp) == 0) { $msg .= $text['message-required']." ".$text['label-timestamp']."<br>\n"; }
-			if (strlen($device_mac_address) == 0) { $msg .= $text['message-required']." ".$text['label-device_mac_address']."<br>\n"; }
+			if (strlen($device_address) == 0) { $msg .= $text['message-required']." ".$text['label-device_address']."<br>\n"; }
 			if (strlen($request_scheme) == 0) { $msg .= $text['message-required']." ".$text['label-request_scheme']."<br>\n"; }
 			if (strlen($http_host) == 0) { $msg .= $text['message-required']." ".$text['label-http_host']."<br>\n"; }
 			if (strlen($server_port) == 0) { $msg .= $text['message-required']." ".$text['label-server_port']."<br>\n"; }
@@ -140,7 +140,7 @@
 			$array['device_logs'][0]['domain_uuid'] = $_SESSION['domain_uuid'];
 			$array['device_logs'][0]['device_uuid'] = $device_uuid;
 			$array['device_logs'][0]['timestamp'] = $timestamp;
-			$array['device_logs'][0]['device_mac_address'] = $device_mac_address;
+			$array['device_logs'][0]['device_address'] = $device_address;
 			$array['device_logs'][0]['request_scheme'] = $request_scheme;
 			$array['device_logs'][0]['http_host'] = $http_host;
 			$array['device_logs'][0]['server_port'] = $server_port;
@@ -186,7 +186,7 @@
 		if (is_array($row) && sizeof($row) != 0) {
 			$device_uuid = $row["device_uuid"];
 			$timestamp = $row["timestamp"];
-			$device_mac_address = $row["device_mac_address"];
+			$device_address = $row["device_address"];
 			$request_scheme = $row["request_scheme"];
 			$http_host = $row["http_host"];
 			$server_port = $row["server_port"];
@@ -257,12 +257,12 @@
 
 	echo "<tr>\n";
 	echo "<td class='vncellreq' valign='top' align='left' nowrap='nowrap'>\n";
-	echo "	".$text['label-device_mac_address']."\n";
+	echo "	".$text['label-device_address']."\n";
 	echo "</td>\n";
 	echo "<td class='vtable' style='position: relative;' align='left'>\n";
-	echo "	<input class='formfld' type='text' name='device_mac_address' maxlength='255' value='".escape($device_mac_address)."'>\n";
+	echo "	<input class='formfld' type='text' name='device_address' maxlength='255' value='".escape($device_address)."'>\n";
 	echo "<br />\n";
-	echo $text['description-device_mac_address']."\n";
+	echo $text['description-device_address']."\n";
 	echo "</td>\n";
 	echo "</tr>\n";
 

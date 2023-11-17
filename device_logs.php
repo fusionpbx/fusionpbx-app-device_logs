@@ -114,7 +114,7 @@
 	}
 	if (isset($search)) {
 		$sql .= "and (";
-		$sql .= "	lower(device_mac_address) like :search ";
+		$sql .= "	lower(device_address) like :search ";
 		$sql .= "	or lower(request_scheme) like :search ";
 		$sql .= "	or lower(http_host) like :search ";
 		$sql .= "	or lower(server_port) like :search ";
@@ -148,7 +148,7 @@
 	$sql .= "timestamp, \n";
 	$sql .= "to_char(timezone(:time_zone, timestamp), 'DD Mon YYYY') as date_formatted, \n";
 	$sql .= "to_char(timezone(:time_zone, timestamp), 'HH12:MI:SS am') as time_formatted, \n";
-	$sql .= "device_mac_address, \n";
+	$sql .= "device_address, \n";
 	$sql .= "request_scheme, \n";
 	$sql .= "http_host, \n";
 	$sql .= "server_port, \n";
@@ -170,7 +170,7 @@
 	$sql .= "and l.domain_uuid = d.domain_uuid \n";
 	if (isset($search)) {
 		$sql .= "and ( \n";
-		$sql .= "	lower(device_mac_address) like :search \n";
+		$sql .= "	lower(device_address) like :search \n";
 		$sql .= "	or lower(request_scheme) like :search \n";
 		$sql .= "	or lower(http_host) like :search \n";
 		$sql .= "	or lower(server_port) like :search \n";
@@ -263,7 +263,7 @@
 	}
 	echo "<th class='left'>".$text['label-date']."</th>\n";
 	echo "<th class='left hide-md-dn'>".$text['label-time']."</th>\n";
-	echo th_order_by('device_mac_address', $text['label-device_mac_address'], $order_by, $order);
+	echo th_order_by('device_address', $text['label-device_address'], $order_by, $order);
 	echo "<th class='left hide-sm-dn'>".$text['label-request_scheme']."</th>\n";
 	echo "<th class='left hide-md-dn'>".$text['label-http_host']."</th>\n";
 	echo "<th class='left hide-md-dn'>".$text['label-server_port']."</th>\n";
@@ -296,7 +296,7 @@
 			}
 			echo "	<td>".escape($row['date_formatted'])."</td>\n";
 			echo "	<td class='left hide-md-dn'>".escape($row['time_formatted'])."</td>\n";
-			echo "	<td>".escape($row['device_mac_address'])."</td>\n";
+			echo "	<td>".escape($row['device_address'])."</td>\n";
 			echo "	<td class='left hide-sm-dn'>".escape($row['request_scheme'])."</td>\n";
 			echo "	<td class='left hide-md-dn'>".escape($row['http_host'])."</td>\n";
 			echo "	<td class='left hide-md-dn'>".escape($row['server_port'])."</td>\n";
