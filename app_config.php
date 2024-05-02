@@ -17,7 +17,7 @@
 		//$apps[$x]['permissions'][$y]['groups'][] = 'admin';
 		$y++;
 		$apps[$x]['permissions'][$y]['name'] = 'device_log_add';
-		$apps[$x]['permissions'][$y]['groups'][] = 'superadmin';
+		//$apps[$x]['permissions'][$y]['groups'][] = 'superadmin';
 		//$apps[$x]['permissions'][$y]['groups'][] = 'admin';
 		$y++;
 		$apps[$x]['permissions'][$y]['name'] = 'device_log_edit';
