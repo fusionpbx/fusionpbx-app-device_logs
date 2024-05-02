@@ -1,4 +1,4 @@
-4<?php
+<?php
 /*
 	Copyright (c) 2019-2023 Mark J Crane <markjcrane@fusionpbx.com>
 	
@@ -246,7 +246,7 @@
 
 	echo $text['description-device_logs']."\n";
 	echo "<br /><br />\n";
-
+	$device_logs
 	echo "<form id='form_list' method='post'>\n";
 	echo "<input type='hidden' id='action' name='action' value=''>\n";
 	echo "<input type='hidden' name='search' value=\"".escape($search)."\">\n";
