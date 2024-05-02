@@ -72,7 +72,7 @@
 	}
 
 //process the user data and save it to the database
-	if (count($_POST) > 0 && strlen($_POST["persistformvar"]) == 0) {
+	if (count($_POST) > 0 && empty($_POST["persistformvar"])) {
 
 		//delete the bridge
 			if (permission_exists('bridge_delete')) {
@@ -117,7 +117,7 @@
 			if (strlen($http_status) == 0) { $msg .= $text['message-required']." ".$text['label-http_status']."<br>\n"; }
 			if (strlen($http_status_code) == 0) { $msg .= $text['message-required']." ".$text['label-http_status_code']."<br>\n"; }
 			//if (strlen($http_content_body) == 0) { $msg .= $text['message-required']." ".$text['label-http_content_body']."<br>\n"; }
-			if (strlen($msg) > 0 && strlen($_POST["persistformvar"]) == 0) {
+			if (strlen($msg) > 0 && empty($_POST["persistformvar"])) {
 				require_once "resources/header.php";
 				require_once "resources/persist_form_var.php";
 				echo "<div align='center'>\n";
