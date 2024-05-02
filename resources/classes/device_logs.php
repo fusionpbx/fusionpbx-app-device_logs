@@ -95,7 +95,7 @@ if (!class_exists('device_logs')) {
 							$x = 0;
 							foreach ($records as $record) {
 								//add to the array
-									if ($record['checked'] == 'true' && is_uuid($record['uuid'])) {
+									if (isset($record['checked']) && $record['checked'] == 'true' && is_uuid($record['uuid'])) {
 										$array[$this->table][$x][$this->name.'_uuid'] = $record['uuid'];
 										$array[$this->table][$x]['domain_uuid'] = $_SESSION['domain_uuid'];
 									}
