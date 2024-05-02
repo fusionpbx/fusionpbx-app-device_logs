@@ -1,4 +1,4 @@
-<?php
+4<?php
 /*
 	Copyright (c) 2019-2023 Mark J Crane <markjcrane@fusionpbx.com>
 	
@@ -255,7 +255,7 @@
 	echo "<tr class='list-header'>\n";
 	if (permission_exists('device_log_add') || permission_exists('device_log_edit') || permission_exists('device_log_delete')) {
 		echo "	<th class='checkbox'>\n";
-		echo "		<input type='checkbox' id='checkbox_all' name='checkbox_all' onclick='list_all_toggle();' ".($device_logs ?: "style='visibility: hidden;'").">\n";
+		echo "		<input type='checkbox' id='checkbox_all' name='checkbox_all' onclick='list_all_toggle();' ".(!empty($device_logs) ?: "style='visibility: hidden;'").">\n";
 		echo "	</th>\n";
 	}
 	if ($show == 'all' && permission_exists('device_log_all')) {
