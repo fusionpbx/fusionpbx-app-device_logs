@@ -98,21 +98,22 @@
 	}
 
 //add the search string
-	if (isset($_GET["search"]) && $_GET["search"] != '') {
+	if (isset($_GET["search"]) && !empty($_GET["search"])) {
 		$search =  strtolower($_GET["search"]);
 	}
 
 //get the count
 	$sql = "select count(device_log_uuid) \n";
-	$sql .= "from v_device_logs \n";
+	$sql .= "FROM v_device_logs AS l \n";
+	$sql .= "LEFT JOIN v_domains AS d ON l.domain_uuid = d.domain_uuid \n";
 	if ($show == "all" && permission_exists('device_log_all')) {
-		$sql .= "where true \n";
+		$sql .= "WHERE true \n";
 	}
 	else {
-		$sql .= "where (domain_uuid = :domain_uuid or domain_uuid is null) ";
+		$sql .= "WHERE (l.domain_uuid = :domain_uuid) \n";
 		$parameters['domain_uuid'] = $domain_uuid;
 	}
-	if (isset($search)) {
+	if (!empty($search)) {
 		$sql .= "and (";
 		$sql .= "	lower(device_address) like :search ";
 		$sql .= "	or lower(request_scheme) like :search ";
@@ -140,7 +141,7 @@
 	$offset = $rows_per_page * $page;
 
 //get the list
-	$sql = "select \n";
+	$sql = "SELECT \n";
 	$sql .= "d.domain_uuid, \n";
 	$sql .= "device_log_uuid, \n";
 	$sql .= "device_uuid, \n";
@@ -159,17 +160,17 @@
 	$sql .= "http_status, \n";
 	$sql .= "http_status_code, \n";
 	$sql .= "http_content_body \n";
-	$sql .= "from v_device_logs as l, v_domains as d \n";
+	$sql .= "FROM v_device_logs AS l \n";
+	$sql .= "LEFT JOIN v_domains AS d ON l.domain_uuid = d.domain_uuid \n";
 	if ($show == "all" && permission_exists('device_log_all')) {
-		$sql .= "where true \n";
+		$sql .= "WHERE true \n";
 	}
 	else {
-		$sql .= "where (l.domain_uuid = :domain_uuid or l.domain_uuid is null) \n";
+		$sql .= "WHERE (l.domain_uuid = :domain_uuid) \n";
 		$parameters['domain_uuid'] = $domain_uuid;
 	}
-	$sql .= "and l.domain_uuid = d.domain_uuid \n";
-	if (isset($search)) {
-		$sql .= "and ( \n";
+	if (!empty($search)) {
+		$sql .= "AND ( \n";
 		$sql .= "	lower(device_address) like :search \n";
 		$sql .= "	or lower(request_scheme) like :search \n";
 		$sql .= "	or lower(http_host) like :search \n";
