@@ -36,7 +36,7 @@
 
 		//prepare the array
 			$array['device_logs'][0]['device_log_uuid'] = uuid();
-			$array['device_logs'][0]['domain_uuid'] = $_SESSION['domain_uuid'];
+			$array['device_logs'][0]['domain_uuid'] = $domain_uuid;
 			$array['device_logs'][0]['device_uuid'] = $device_uuid;
 			$array['device_logs'][0]['timestamp'] = 'now';
 			$array['device_logs'][0]['device_address'] = $device_address;
