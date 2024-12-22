@@ -52,7 +52,7 @@
 			$array['device_logs'][0]['http_content_body'] = $file_contents;
 
 		//grant temporary permissions
-			$p = new permissions;
+			$p = permissions::new();
 			$p->add('device_log_add', 'temp');
 			//$p->add('device_log_edit', 'temp');
 
@@ -65,7 +65,7 @@
 			unset($array);
 
 		//grant temporary permissions
-			$p = new permissions;
+			$p = permissions::new();
 			$p->delete('device_log_add', 'temp');
 			//$p->delete('device_log_edit', 'temp');
 
