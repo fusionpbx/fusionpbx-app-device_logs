@@ -1,14 +1,14 @@
 <?php
 /*
 	Copyright (c) 2019-2023 Mark J Crane <markjcrane@fusionpbx.com>
-	
+
 	Redistribution and use in source and binary forms, with or without
 	modification, are permitted provided that the following conditions
 	are met:
 
 		1. Redistributions of source code must retain the above copyright
 		notice, this list of conditions and the following disclaimer.
-	
+
 		2. Redistributions in binary form must reproduce the above copyright
 		notice, this list of conditions and the following disclaimer in the
 		documentation and/or other materials provided with the distribution.
@@ -42,6 +42,9 @@
 //add multi-lingual support
 	$language = new text;
 	$text = $language->get();
+
+//connect to the database
+	$database = new database;
 
 //action add or update
 	if (!empty($_REQUEST["id"]) && is_uuid($_REQUEST["id"])) {
@@ -153,7 +156,6 @@
 			$array['device_logs'][0]['http_content_body'] = $http_content_body;
 
 		//save the data
-			$database = new database;
 			$database->app_name = 'device logs';
 			$database->app_uuid = '78b1e5c7-5028-43e7-a05b-a36b44f87087';
 			$database->save($array);
@@ -181,7 +183,6 @@
 		//$sql .= "and domain_uuid = :domain_uuid ";
 		//$parameters['domain_uuid'] = $_SESSION['domain_uuid'];
 		$parameters['device_log_uuid'] = $device_log_uuid;
-		$database = new database;
 		$row = $database->select($sql, $parameters, 'row');
 		if (is_array($row) && sizeof($row) != 0) {
 			$device_uuid = $row["device_uuid"];

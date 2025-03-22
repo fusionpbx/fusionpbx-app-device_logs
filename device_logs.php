@@ -1,14 +1,14 @@
 <?php
 /*
 	Copyright (c) 2019-2023 Mark J Crane <markjcrane@fusionpbx.com>
-	
+
 	Redistribution and use in source and binary forms, with or without
 	modification, are permitted provided that the following conditions
 	are met:
 
 		1. Redistributions of source code must retain the above copyright
 		notice, this list of conditions and the following disclaimer.
-	
+
 		2. Redistributions in binary form must reproduce the above copyright
 		notice, this list of conditions and the following disclaimer in the
 		documentation and/or other materials provided with the distribution.
@@ -43,6 +43,9 @@
 //add multi-lingual support
 	$language = new text;
 	$text = $language->get();
+
+//connect to the database
+	$database = new database;
 
 //set additional variables
 	$search = $_GET["search"] ?? '';
@@ -128,7 +131,6 @@
 		$sql .= ") ";
 		$parameters['search'] = '%'.$search.'%';
 	}
-	$database = new database;
 	$num_rows = $database->select($sql, $parameters, 'column');
 
 //prepare to page the results
@@ -187,7 +189,6 @@
 	$parameters['time_zone'] = $time_zone;
 	$sql .= order_by($order_by, $order, 'timestamp', 'desc');
 	$sql .= limit_offset($rows_per_page, $offset);
-	$database = new database;
 	$device_logs = $database->select($sql, $parameters, 'all');
 	unset($sql, $parameters);
 
