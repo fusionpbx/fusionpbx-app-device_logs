@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright (c) 2019-2023 Mark J Crane <markjcrane@fusionpbx.com>
+	Copyright (c) 2019-2025 Mark J Crane <markjcrane@fusionpbx.com>
 
 	Redistribution and use in source and binary forms, with or without
 	modification, are permitted provided that the following conditions
@@ -44,7 +44,7 @@
 	$text = $language->get();
 
 //connect to the database
-	$database = new database;
+	$database = database::new();
 
 //action add or update
 	if (!empty($_REQUEST["id"]) && is_uuid($_REQUEST["id"])) {
@@ -202,12 +202,12 @@
 		unset($sql, $parameters, $row);
 	}
 
-// load editor preferences/defaults
-	$setting_size = !empty($_SESSION["editor"]["font_size"]["text"]) ? $_SESSION["editor"]["font_size"]["text"] : '12px';
-	$setting_theme = !empty($_SESSION["editor"]["theme"]["text"]) ? $_SESSION["editor"]["theme"]["text"] : 'cobalt';
-	$setting_invisibles = isset($_SESSION["editor"]["invisibles"]["boolean"]) && $_SESSION["editor"]["invisibles"]["boolean"] != '' ? $_SESSION["editor"]["invisibles"]["boolean"] : 'false';
-	$setting_indenting = isset($_SESSION["editor"]["indent_guides"]["boolean"]) && $_SESSION["editor"]["indent_guides"]["boolean"] != '' ? $_SESSION["editor"]["indent_guides"]["boolean"] : 'false';
-	$setting_numbering = isset($_SESSION["editor"]["line_numbers"]["boolean"]) && $_SESSION["editor"]["line_numbers"]["boolean"] != '' ? $_SESSION["editor"]["line_numbers"]["boolean"] : 'true';
+//load editor preferences/defaults
+	$setting_size = $settings->get('editor','font_size','12px');
+	$setting_theme = $settings->get('editor','theme','cobalt');
+	$setting_invisibles = $settings->get('editor','invisibles',false);
+	$setting_indenting = $settings->get('editor','indent_guides',false);
+	$setting_numbering = $settings->get('editor','line_numbers',true);
 
 //create token
 	$object = new token;
@@ -271,14 +271,14 @@
 	echo "<div class='action_bar' id='action_bar'>\n";
 	echo "	<div class='heading'><b>".$text['title-device_log']."</b></div>\n";
 	echo "	<div class='actions'>\n";
-	echo button::create(['type'=>'button','label'=>$text['button-back'],'icon'=>$_SESSION['theme']['button_icon_back'],'id'=>'btn_back','style'=>'margin-right: 15px;','link'=>'device_logs.php']);
+	echo button::create(['type'=>'button','label'=>$text['button-back'],'icon'=>$settings->get('theme','button_icon_back'),'id'=>'btn_back','style'=>'margin-right: 15px;','link'=>'device_logs.php']);
 	if ($action == 'update' && permission_exists('device_log_delete')) {
-		echo button::create(['type'=>'button','label'=>$text['button-delete'],'icon'=>$_SESSION['theme']['button_icon_delete'],'name'=>'btn_delete','style'=>'margin-right: 15px;','onclick'=>"modal_open('modal-delete','btn_delete');"]);
+		echo button::create(['type'=>'button','label'=>$text['button-delete'],'icon'=>$settings->get('theme','button_icon_delete'),'name'=>'btn_delete','style'=>'margin-right: 15px;','onclick'=>"modal_open('modal-delete','btn_delete');"]);
 	}
 	if ($action == 'update' && permission_exists('device_log_copy')) {
-		echo button::create(['type'=>'button','label'=>$text['button-copy'],'icon'=>$_SESSION['theme']['button_icon_copy'],'name'=>'btn_copy','style'=>'margin-right: 15px;','link'=>'device_log_copy.php']);
+		echo button::create(['type'=>'button','label'=>$text['button-copy'],'icon'=>$settings->get('theme','button_icon_copy'),'name'=>'btn_copy','style'=>'margin-right: 15px;','link'=>'device_log_copy.php']);
 	}
-	echo button::create(['type'=>'submit','label'=>$text['button-save'],'icon'=>$_SESSION['theme']['button_icon_save'],'id'=>'btn_save','name'=>'action','value'=>'save']);
+	echo button::create(['type'=>'submit','label'=>$text['button-save'],'icon'=>$settings->get('theme','button_icon_save'),'id'=>'btn_save','name'=>'action','value'=>'save']);
 	echo "	</div>\n";
 	echo "	<div style='clear: both; text-align: left;'>".$text['description-device_logs']."</div>\n";
 	echo "</div>\n";
@@ -523,12 +523,12 @@
 	echo "		theme: 'ace/theme/'+document.getElementById('theme').options[document.getElementById('theme').selectedIndex].value,\n";
 	echo "		selectionStyle: 'text',\n";
 	echo "		cursorStyle: 'smooth',\n";
-	echo "		showInvisibles: ".$setting_invisibles.",\n";
-	echo "		displayIndentGuides: ".$setting_indenting.",\n";
-	echo "		showLineNumbers: ".$setting_numbering.",\n";
+	echo "		showInvisibles: ".($setting_invisibles ? 'true' : 'false').",\n";
+	echo "		displayIndentGuides: ".($setting_indenting ? 'true' : 'false').",\n";
+	echo "		showLineNumbers: ".($setting_numbering ? 'true' : 'false').",\n";
 	echo "		showGutter: true,\n";
 	echo "		scrollPastEnd: true,\n";
-	echo "		fadeFoldWidgets: ".$setting_numbering.",\n";
+	echo "		fadeFoldWidgets: ".($setting_numbering ? 'true' : 'false').",\n";
 	echo "		showPrintMargin: false,\n";
 	echo "		highlightGutterLine: false,\n";
 	echo "		useSoftTabs: false\n";

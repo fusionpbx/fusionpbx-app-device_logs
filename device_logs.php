@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright (c) 2019-2023 Mark J Crane <markjcrane@fusionpbx.com>
+	Copyright (c) 2019-2025 Mark J Crane <markjcrane@fusionpbx.com>
 
 	Redistribution and use in source and binary forms, with or without
 	modification, are permitted provided that the following conditions
@@ -45,14 +45,14 @@
 	$text = $language->get();
 
 //connect to the database
-	$database = new database;
+	$database = database::new();
 
 //set additional variables
 	$search = $_GET["search"] ?? '';
 	$show = $_GET["show"] ?? '';
 
 //set from session variables
-	$list_row_edit_button = !empty($_SESSION['theme']['list_row_edit_button']['boolean']) ? $_SESSION['theme']['list_row_edit_button']['boolean'] : 'false';
+	$list_row_edit_button = $settings->get('theme','list_row_edit_button',false);
 
 //get the http post data
 	if (!empty($_POST['device_logs']) && is_array($_POST['device_logs'])) {
@@ -93,12 +93,7 @@
 	$order = $_GET["order"] ?? '';
 
 //set the time zone
-	if (isset($_SESSION['domain']['time_zone']['name'])) {
-		$time_zone = $_SESSION['domain']['time_zone']['name'];
-	}
-	else {
-		$time_zone = date_default_timezone_get();
-	}
+	$time_zone = $settings->get('domain','time_zone',date_default_timezone_get());
 
 //add the search string
 	if (isset($_GET["search"]) && !empty($_GET["search"])) {
@@ -134,7 +129,7 @@
 	$num_rows = $database->select($sql, $parameters, 'column');
 
 //prepare to page the results
-	$rows_per_page = (!empty($_SESSION['domain']['paging']['numeric'])) ? $_SESSION['domain']['paging']['numeric'] : 50;
+	$rows_per_page = $settings->get('domain','paging',50);
 	$param = $search ? "&search=".$search : null;
 	$param .= ($show == 'all' && permission_exists('device_log_all')) ? "&show=all" : null;
 	$page = isset($_GET['page']) ? $_GET['page'] : 0;
@@ -205,10 +200,10 @@
 	echo "	<div class='heading'><b>".$text['title-device_logs']."</b><div class='count'>".number_format($num_rows)."</div></div>\n";
 	echo "	<div class='actions'>\n";
 	if (permission_exists('device_log_add')) {
-		echo button::create(['type'=>'button','label'=>$text['button-add'],'icon'=>$_SESSION['theme']['button_icon_add'],'id'=>'btn_add','link'=>'device_log_edit.php']);
+		echo button::create(['type'=>'button','label'=>$text['button-add'],'icon'=>$settings->get('theme','button_icon_add'),'id'=>'btn_add','link'=>'device_log_edit.php']);
 	}
 	if (permission_exists('device_log_delete') && $device_logs) {
-		echo button::create(['type'=>'button','label'=>$text['button-delete'],'icon'=>$_SESSION['theme']['button_icon_delete'],'name'=>'btn_delete','onclick'=>"modal_open('modal-delete','btn_delete');"]);
+		echo button::create(['type'=>'button','label'=>$text['button-delete'],'icon'=>$settings->get('theme','button_icon_delete'),'name'=>'btn_delete','onclick'=>"modal_open('modal-delete','btn_delete');"]);
 	}
 	echo 		"<form id='form_search' class='inline' method='get'>\n";
 	if (permission_exists('device_log_all')) {
@@ -216,11 +211,11 @@
 			echo "		<input type='hidden' name='show' value='all'>\n";
 		}
 		else {
-			echo button::create(['type'=>'button','label'=>$text['button-show_all'],'icon'=>$_SESSION['theme']['button_icon_all'],'link'=>'?show=all']);
+			echo button::create(['type'=>'button','label'=>$text['button-show_all'],'icon'=>$settings->get('theme','button_icon_all'),'link'=>'?show=all']);
 		}
 	}
 	echo 		"<input type='text' class='txt list-search' name='search' id='search' value=\"".escape($search)."\" placeholder=\"".$text['label-search']."\" onkeydown='list_search_reset();'>";
-	echo button::create(['label'=>$text['button-search'],'icon'=>$_SESSION['theme']['button_icon_search'],'type'=>'submit','id'=>'btn_search']);
+	echo button::create(['label'=>$text['button-search'],'icon'=>$settings->get('theme','button_icon_search'),'type'=>'submit','id'=>'btn_search']);
 	if (!empty($paging_controls_mini)) {
 		echo 	"<span style='margin-left: 15px;'>".$paging_controls_mini."</span>\n";
 	}
@@ -269,7 +264,7 @@
 	echo "<th class='left hide-md-dn'>".$text['label-http_user_agent']."</th>\n";
 	echo "<th class='left hide-md-dn'>".$text['label-http_status']."</th>\n";
 	echo "<th class='left hide-md-dn'>".$text['label-http_status_code']."</th>\n";
-	if (permission_exists('device_log_edit') && $list_row_edit_button == 'true') {
+	if (permission_exists('device_log_edit') && !$list_row_edit_button) {
 		echo "	<td class='action-button'>&nbsp;</td>\n";
 	}
 	echo "</tr>\n";
@@ -302,9 +297,9 @@
 			echo "	<td class='left hide-md-dn'>".escape($row['http_user_agent'])."</td>\n";
 			echo "	<td class='left hide-md-dn'>".escape($row['http_status'])."</td>\n";
 			echo "	<td class='left hide-md-dn'>".escape($row['http_status_code'])."</td>\n";
-			if (permission_exists('device_log_edit') && $list_row_edit_button == 'true') {
+			if (permission_exists('device_log_edit') && !$list_row_edit_button) {
 				echo "	<td class='action-button'>\n";
-				echo button::create(['type'=>'button','title'=>$text['button-edit'],'icon'=>$_SESSION['theme']['button_icon_edit'],'link'=>$list_row_url]);
+				echo button::create(['type'=>'button','title'=>$text['button-edit'],'icon'=>$settings->get('theme','button_icon_edit'),'link'=>$list_row_url]);
 				echo "	</td>\n";
 			}
 			echo "</tr>\n";
