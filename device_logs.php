@@ -264,7 +264,7 @@
 	echo "<th class='left hide-md-dn'>".$text['label-http_user_agent']."</th>\n";
 	echo "<th class='left hide-md-dn'>".$text['label-http_status']."</th>\n";
 	echo "<th class='left hide-md-dn'>".$text['label-http_status_code']."</th>\n";
-	if (permission_exists('device_log_edit') && !$list_row_edit_button) {
+	if (permission_exists('device_log_edit') && $list_row_edit_button) {
 		echo "	<td class='action-button'>&nbsp;</td>\n";
 	}
 	echo "</tr>\n";
@@ -297,7 +297,7 @@
 			echo "	<td class='left hide-md-dn'>".escape($row['http_user_agent'])."</td>\n";
 			echo "	<td class='left hide-md-dn'>".escape($row['http_status'])."</td>\n";
 			echo "	<td class='left hide-md-dn'>".escape($row['http_status_code'])."</td>\n";
-			if (permission_exists('device_log_edit') && !$list_row_edit_button) {
+			if (permission_exists('device_log_edit') && $list_row_edit_button) {
 				echo "	<td class='action-button'>\n";
 				echo button::create(['type'=>'button','title'=>$text['button-edit'],'icon'=>$settings->get('theme','button_icon_edit'),'link'=>$list_row_url]);
 				echo "	</td>\n";
