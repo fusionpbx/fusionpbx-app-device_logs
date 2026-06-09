@@ -295,7 +295,7 @@ class device_logs {
 				$code = $database->message['code'] ?? 0;
 				//record result
 				if ($code == 200) {
-					maintenance_service::log_write(self::class, "Successfully removed entries older than $device_log_retention_days", $domain_uuid);
+					maintenance_service::log_write(self::class, "device log " . "Successfully removed entries older than $device_log_retention_days days", $domain_uuid);
 				} else {
 					$message = $database->message['message'] ?? "An unknown error has occurred";
 					maintenance_service::log_write(self::class, "device log " . "Unable to remove old database records. Error message: $message ($code)", $domain_uuid, maintenance_service::LOG_ERROR);
