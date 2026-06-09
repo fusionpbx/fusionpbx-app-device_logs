@@ -5,7 +5,7 @@
 		$apps[$x]['uuid'] = '78b1e5c7-5028-43e7-a05b-a36b44f87087';
 		$apps[$x]['category'] = '';
 		$apps[$x]['subcategory'] = '';
-		$apps[$x]['version'] = '1.3';
+		$apps[$x]['version'] = '1.4';
 		$apps[$x]['license'] = 'BSD';
 		$apps[$x]['url'] = 'http://www.fusionpbx.com';
 		$apps[$x]['description']['en-us'] = '';
@@ -31,6 +31,16 @@
 		$apps[$x]['permissions'][$y]['name'] = 'device_log_all';
 		$apps[$x]['permissions'][$y]['groups'][] = 'superadmin';
 		$y++;
+
+	//default settings
+		$y = 0;
+		$apps[$x]['default_settings'][$y]['default_setting_uuid'] = "dc9776ee-a2ae-4e6b-821c-dc5a51df1b1f";
+		$apps[$x]['default_settings'][$y]['default_setting_category'] = "device_logs";
+		$apps[$x]['default_settings'][$y]['default_setting_subcategory'] = "database_retention_days";
+		$apps[$x]['default_settings'][$y]['default_setting_name'] = "numeric";
+		$apps[$x]['default_settings'][$y]['default_setting_value'] = "30";
+		$apps[$x]['default_settings'][$y]['default_setting_enabled'] = "false";
+		$apps[$x]['default_settings'][$y]['default_setting_description'] = "Number of days maintenance application will retain device logs in the database.";
 
 	//device Logs
 		$y = 0;

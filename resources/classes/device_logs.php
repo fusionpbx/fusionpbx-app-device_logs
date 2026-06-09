@@ -259,6 +259,63 @@ class device_logs {
 		}
 	}
 
-}
+	/**
+	 * Removes old entries in the database device_logs table
+	 * see {@link https://github.com/fusionpbx/fusionpbx-app-maintenance/} FusionPBX Maintenance App
+	 *
+	 * @param settings $settings Settings object
+	 *
+	 * @return void
+	 */
 
-?>
+	public static function database_maintenance(settings $settings): void {
+		//set table name for query
+		$table = 'device_logs';
+
+		//get a database connection
+		$database = $settings->database();
+
+		//get a list of domains
+		$domains = maintenance::get_domains($database);
+		foreach ($domains as $domain_uuid => $domain_name) {
+
+			//get domain settings
+			$domain_settings = new settings(['database' => $database, 'domain_uuid' => $domain_uuid]);
+
+			//get the retention days for device log table using 'device' and 'database_retention_days'
+			$device_log_retention_days = $domain_settings->get('device_logs', 'database_retention_days', '');
+
+			//ensure we have retention days
+			if (!empty($device_log_retention_days) && is_numeric((int)$device_log_retention_days)) {
+
+				//clear out old device_log records
+				$sql = "delete from v_{$table} WHERE insert_date < NOW() - INTERVAL '{$device_log_retention_days} days'"
+					. " and domain_uuid = '{$domain_uuid}'";
+				$database->execute($sql);
+				$code = $database->message['code'] ?? 0;
+				//record result
+				if ($code == 200) {
+					maintenance_service::log_write(self::class, "device log " . "Successfully removed entries older than $device_log_retention_days days", $domain_uuid);
+				} else {
+					$message = $database->message['message'] ?? "An unknown error has occurred";
+					maintenance_service::log_write(self::class, "device log " . "Unable to remove old database records. Error message: $message ($code)", $domain_uuid, maintenance_service::LOG_ERROR);
+				}
+			} else {
+				//report an invalid setting
+				maintenance_service::log_write(self::class, "Retention days not set or not a numeric value", $domain_uuid, maintenance_service::LOG_ERROR);
+			}
+		}
+
+		//ensure logs are saved
+		maintenance_service::log_flush();
+	}
+
+	public static function database_maintenance_category(): string {
+		return "device_logs";
+	}
+
+	public static function database_maintenance_subcategory(): string {
+		return "database_retention_days";
+	}
+
+}
