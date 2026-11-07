@@ -78,7 +78,7 @@
 	if (count($_POST) > 0 && empty($_POST["persistformvar"])) {
 
 		//delete the bridge
-			if (permission_exists('bridge_delete')) {
+			if (permission_exists('device_log_delete')) {
 				if ($_POST['action'] == 'delete' && is_uuid($device_log_uuid)) {
 					//prepare
 						$array[0]['checked'] = 'true';
@@ -426,7 +426,7 @@
 	echo "	".$text['label-http_content_body']."\n";
 	echo "</td>\n";
 	echo "<td class='vtable' style='position: relative;' align='left'>\n";
-	echo "	<textarea class='formfld' name='http_content_body' id='http_content_body' style='display: none;'>".$http_content_body."</textarea>\n";
+	echo "	<textarea class='formfld' name='http_content_body' id='http_content_body' style='display: none;'>".escape($http_content_body)."</textarea>\n";
 	echo "	<div id='editor'></div>\n";
 	echo "	<table cellpadding='0' cellspacing='0' border='0' style='float: right; padding-top: 5px;'>\n";
 	echo "		<tr>\n";
