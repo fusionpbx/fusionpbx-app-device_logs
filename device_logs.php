@@ -64,18 +64,6 @@
 //process the http post data by action
 	if (!empty($action) && is_array($device_logs) && @sizeof($device_logs) != 0) {
 		switch ($action) {
-			case 'copy':
-				if (permission_exists('device_log_add')) {
-					$obj = new device_logs;
-					$obj->copy($device_logs);
-				}
-				break;
-			case 'toggle':
-				if (permission_exists('device_log_edit')) {
-					$obj = new device_logs;
-					$obj->toggle($device_logs);
-				}
-				break;
 			case 'delete':
 				if (permission_exists('device_log_delete')) {
 					$obj = new device_logs;
@@ -84,13 +72,13 @@
 				break;
 		}
 
-		header('Location: device_logs.php'.($search != '' ? '?search='.urlencode($search) : null));
+		header('Location: device_logs.php'.(!empty($search) ? '?search='.urlencode($search) : null));
 		exit;
 	}
 
 //get order and order by
-	$order_by = $_GET["order_by"] ?? '';
-	$order = $_GET["order"] ?? '';
+	$order_by = preg_replace('#[^a-zA-Z0-9_.]#', '', (string)($_GET["order_by"] ?? ''));
+	$order = strtolower((string)($_GET["order"] ?? '')) === 'desc' ? 'desc' : 'asc';
 
 //set the time zone
 	$time_zone = $settings->get('domain','time_zone',date_default_timezone_get());
@@ -130,9 +118,9 @@
 
 //prepare to page the results
 	$rows_per_page = $settings->get('domain','paging',50);
-	$param = $search ? "&search=".$search : null;
+	$param = !empty($search) ? "&search=".urlencode($search) : null;
 	$param .= ($show == 'all' && permission_exists('device_log_all')) ? "&show=all" : null;
-	$page = isset($_GET['page']) ? $_GET['page'] : 0;
+	$page = is_numeric($_GET['page'] ?? '') ? $_GET['page'] : 0;
 	list($paging_controls, $rows_per_page) = paging($num_rows, $param, $rows_per_page);
 	list($paging_controls_mini, $rows_per_page) = paging($num_rows, $param, $rows_per_page, true);
 	$offset = $rows_per_page * $page;
@@ -224,13 +212,7 @@
 	echo "	<div style='clear: both;'></div>\n";
 	echo "</div>\n";
 
-	if (permission_exists('device_log_add') && $device_logs) {
-		echo modal::create(['id'=>'modal-copy','type'=>'copy','actions'=>button::create(['type'=>'button','label'=>$text['button-continue'],'icon'=>'check','id'=>'btn_copy','style'=>'float: right; margin-left: 15px;','collapse'=>'never','onclick'=>"modal_close(); list_action_set('copy'); list_form_submit('form_list');"])]);
-	}
-	if (permission_exists('device_log_edit') && $device_logs) {
-		echo modal::create(['id'=>'modal-toggle','type'=>'toggle','actions'=>button::create(['type'=>'button','label'=>$text['button-continue'],'icon'=>'check','id'=>'btn_toggle','style'=>'float: right; margin-left: 15px;','collapse'=>'never','onclick'=>"modal_close(); list_action_set('toggle'); list_form_submit('form_list');"])]);
-	}
-	if (permission_exists('device_log_delete') && $device_logs) {
+	if (permission_exists('device_log_delete') && !empty($device_logs)) {
 		echo modal::create(['id'=>'modal-delete','type'=>'delete','actions'=>button::create(['type'=>'button','label'=>$text['button-continue'],'icon'=>'check','id'=>'btn_delete','style'=>'float: right; margin-left: 15px;','collapse'=>'never','onclick'=>"modal_close(); list_action_set('delete'); list_form_submit('form_list');"])]);
 	}
 

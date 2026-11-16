@@ -77,9 +77,42 @@
 //process the user data and save it to the database
 	if (count($_POST) > 0 && empty($_POST["persistformvar"])) {
 
-		//delete the bridge
+		//get the uuid from the POST
+			if ($action == "update") {
+				$device_log_uuid = $_POST["device_log_uuid"];
+			}
+
+		//validate the token
+			$token = new token;
+			$token_ok = $token->validate($_SERVER['PHP_SELF']);
+			if (!$token_ok) {
+				message::add($text['message-invalid_token'],'negative');
+				header('Location: device_logs.php');
+				exit;
+			}
+
+		//restrict which records this user can modify, the record must belong to
+		//this domain unless the user has been given access to all domains. this
+		//applies to the delete action as well as the save below.
+			if (is_uuid($device_log_uuid) && !permission_exists('device_log_all')) {
+				//verify the record belongs to this domain before allowing the save
+				$sql = "select device_log_uuid from v_device_logs ";
+				$sql .= "where device_log_uuid = :device_log_uuid ";
+				$sql .= "and domain_uuid = :domain_uuid ";
+				$parameters['device_log_uuid'] = $device_log_uuid;
+				$parameters['domain_uuid'] = $_SESSION['domain_uuid'];
+				$owner = $database->select($sql, $parameters, 'row');
+				unset($sql, $parameters);
+				if (empty($owner)) {
+					message::add($text['message-access_denied'] ?? 'Access denied', 'negative');
+					header('Location: device_logs.php');
+					exit;
+				}
+			}
+
+		//delete the record
 			if (permission_exists('device_log_delete')) {
-				if ($_POST['action'] == 'delete' && is_uuid($device_log_uuid)) {
+				if (($_POST['action'] ?? '') == 'delete' && is_uuid($device_log_uuid)) {
 					//prepare
 						$array[0]['checked'] = 'true';
 						$array[0]['uuid'] = $device_log_uuid;
@@ -90,19 +123,6 @@
 						header('Location: device_logs.php');
 						exit;
 				}
-			}
-
-		//get the uuid from the POST
-			if ($action == "update") {
-				$device_log_uuid = $_POST["device_log_uuid"];
-			}
-
-		//validate the token
-			$token = new token;
-			if (!$token->validate($_SERVER['PHP_SELF'])) {
-				message::add($text['message-invalid_token'],'negative');
-				header('Location: device_logs.php');
-				exit;
 			}
 
 		//check for all required data
@@ -133,6 +153,45 @@
 				return;
 			}
 
+		//the timestamp is stored in a timestamp column, reject anything the
+		//database cannot parse rather than sending an unparseable string
+			if (!empty($timestamp) && strtotime((string) $timestamp) === false) {
+				message::add($text['message-invalid'] ?? 'Invalid', 'negative');
+				header('Location: device_logs.php');
+				exit;
+			}
+
+		//the remote address is stored as text but is displayed as an address, keep
+		//it to the characters used by IPv4 and IPv6 addresses
+			if (!empty($remote_address) && !filter_var((string) $remote_address, FILTER_VALIDATE_IP)) {
+				message::add($text['message-invalid'] ?? 'Invalid', 'negative');
+				header('Location: device_logs.php');
+				exit;
+			}
+
+		//the server port is displayed as a number, keep it numeric
+			if (!empty($server_port) && !is_numeric($server_port)) {
+				message::add($text['message-invalid'] ?? 'Invalid', 'negative');
+				header('Location: device_logs.php');
+				exit;
+			}
+
+		//the request scheme is used to choose the editor mode and is displayed,
+		//allow only the two values that provisioning produces
+			if (!empty($request_scheme) && !in_array(strtolower((string) $request_scheme), ['http','https'], true)) {
+				message::add($text['message-invalid'] ?? 'Invalid', 'negative');
+				header('Location: device_logs.php');
+				exit;
+			}
+
+		//the device uuid is stored in a uuid column, reject anything else rather
+		//than letting the insert fail and reporting a change that did not happen
+			if (!empty($device_uuid) && !is_uuid($device_uuid)) {
+				message::add($text['message-invalid'] ?? 'Invalid', 'negative');
+				header('Location: device_logs.php');
+				exit;
+			}
+
 		//add the device_log_uuid
 			if (!is_uuid($_POST["device_log_uuid"])) {
 				$device_log_uuid = uuid();
@@ -159,15 +218,21 @@
 			$database->app_name = 'device logs';
 			$database->app_uuid = '78b1e5c7-5028-43e7-a05b-a36b44f87087';
 			$database->save($array);
-			//$message = $database->message;
+			$message_code = $database->message['code'] ?? 0;
 
 		//redirect the user
 			if (isset($action)) {
-				if ($action == "add") {
-					$_SESSION["message"] = $text['message-add'];
+				if ($message_code == '200') {
+					if ($action == "add") {
+						$_SESSION["message"] = $text['message-add'];
+					}
+					if ($action == "update") {
+						$_SESSION["message"] = $text['message-update'];
+					}
 				}
-				if ($action == "update") {
-					$_SESSION["message"] = $text['message-update'];
+				else {
+					//the save failed, report it rather than claiming a change
+					message::add($text['message-save_failed'] ?? 'Save failed', 'negative');
 				}
 				header('Location: device_logs.php');
 				//header('Location: device_log_edit.php?id='.urlencode($device_log_uuid));
@@ -180,8 +245,10 @@
 		$device_log_uuid = $_GET["id"] ?? '';
 		$sql = "select * from v_device_logs ";
 		$sql .= "where device_log_uuid = :device_log_uuid ";
-		//$sql .= "and domain_uuid = :domain_uuid ";
-		//$parameters['domain_uuid'] = $_SESSION['domain_uuid'];
+		if (!permission_exists('device_log_all')) {
+			$sql .= "and domain_uuid = :domain_uuid ";
+			$parameters['domain_uuid'] = $_SESSION['domain_uuid'];
+		}
 		$parameters['device_log_uuid'] = $device_log_uuid;
 		$row = $database->select($sql, $parameters, 'row');
 		if (is_array($row) && sizeof($row) != 0) {
@@ -204,6 +271,10 @@
 
 //load editor preferences/defaults
 	$setting_size = $settings->get('editor','font_size','12px');
+	//allow a CSS length only, the value is output into an attribute and a script
+	if (!preg_match('/^[0-9]+(\.[0-9]+)?(px|em|rem|%)$/i', (string)$setting_size)) {
+		$setting_size = '12px';
+	}
 	$setting_theme = $settings->get('editor','theme','cobalt');
 	$setting_invisibles = $settings->get('editor','invisibles',false);
 	$setting_indenting = $settings->get('editor','indent_guides',false);
